@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import { Provider } from "react";
+import Header from "./components/Headers";
+import Footer from "./components/footer/Footer";
+import Brands from "./components/footer/Brands";
+import Newsletter from "./components/footer/Newsletter";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
@@ -19,8 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+      
        className={`${inter.variable} ${playfair.variable}`}>
+        <Header/>
         {children}
+        <Brands/> 
+        <Newsletter/>
+        <Footer/>
       </body>
     </html>
   );

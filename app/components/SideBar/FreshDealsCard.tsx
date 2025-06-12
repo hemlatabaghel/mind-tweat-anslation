@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import SearchInput from "./SearchInput";
+import { PromoCard } from "../common/PromoCard";
 
 const freshItems = [
   {
@@ -36,6 +37,16 @@ const freshItems = [
     title: "Enjoy hot deals on travel essentials, gadgets, fashion...",
     image: "/mainStories/fresh1.png",
   },
+];
+const promoSet1 = [
+  "/mainStories/style1.png",
+  "/mainStories/fresh1.png",
+  "/mainStories/fresh2.png",
+];
+const promoSet2 = [
+  "/mainStories/style2.png",
+  "/mainStories/fresh3.png",
+  "/mainStories/fresh4.png",
 ];
 
 const styleItems = [
@@ -140,42 +151,20 @@ const FreshDealsCard = () => {
       </div>
 
       {/* Style That Speaks Slider */}
-      {[...Array(2)].map((_, i) => (
-        <div
-          key={i}
-          className={`${styleItems[currentStyle].bgColor} p-4 border rounded-md`}
-        >
-          <h4
-            className={`text-[32px] font-serif uppercase ${styleItems[currentStyle].textColor} mb-2`}
-          >
-            {styleItems[currentStyle].title}
-          </h4>
-          <Image
-            src={styleItems[currentStyle].image}
-            alt={styleItems[currentStyle].title}
-            width={134}
-            height={134}
-            className="rounded-md mb-2"
+      <div className="lg:col-span-3 space-y-4">
+          <PromoCard
+            images={promoSet1}
+            bgColor="bg-lime-100"
+            imageRight={false}
+            responsive={true}
           />
-          <p className="text-xs text-gray-600 mb-2">
-            {styleItems[currentStyle].desc}
-          </p>
-          <button className="text-xs mt-2 text-orange-500 underline">
-            Explore Now
-          </button>
-          <div className="flex justify-center gap-2 mt-4">
-            {styleItems.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full ${
-                  index === currentStyle ? "bg-gray-800" : "bg-gray-300"
-                }`}
-                onClick={() => setCurrentStyle(index)}
-              ></button>
-            ))}
-          </div>
+          <PromoCard
+            images={promoSet2}
+            bgColor="bg-pink-100"
+            imageRight={false}
+            responsive={true}
+          />
         </div>
-      ))}
     </aside>
   );
 };

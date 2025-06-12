@@ -1,8 +1,4 @@
-import Header from "../components/Headers";
-import Footer from "../components/footer/Footer";
-import Brands from "../components/footer/Brands";
-import Newsletter from "../components/footer/Newsletter";
-import MainStoriesSection from "../components/MainStories";
+import "./globals.css";
 export default function Home() {
     return (
       <div>

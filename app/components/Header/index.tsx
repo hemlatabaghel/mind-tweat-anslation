@@ -62,7 +62,7 @@ export default function Header() {
           {navItems.map((item, idx) => (
             <li key={idx}>
               <Link
-                href={item === "Home" ? "/" : `/${item}`}
+                href={item === "Home" ? "/" : `/${item.toLowerCase().replace(/ & /g, "-")}`}
                 className={`hover:text-pink-600 transition-colors ${
                   item === "Home" ? "text-pink-600" : "text-black"
                 }`}
