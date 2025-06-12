@@ -18,7 +18,7 @@ const navItems = [
 
 const socialIcons = [
   { src: "/icons/facebook.png", alt: "Facebook" },
-  { src: "/icons/instagram.png", alt: "Instagram" },
+  { src: "/icons/instagram.png", alt: "Instagram" }, 
   { src: "/icons/x.png", alt: "X" },
   { src: "/icons/twitter.png", alt: "Twitter" },
   { src: "/icons/youtube.png", alt: "YouTube" },

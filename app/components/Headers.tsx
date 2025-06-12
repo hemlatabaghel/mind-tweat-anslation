@@ -7,6 +7,7 @@ const navItems = [
   "Latest",
   "Tech",
   "Food",
+  "Deals",
   "Entertainment",
   "Health",
   "Money",
