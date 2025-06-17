@@ -1,16 +1,24 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import SectionLabel from "./SectionLabel";
 import Image from "next/image";
-import { useState } from "react";
+import {
+  Box,
+  Typography,
+  Grid,
+  Paper,
+  useTheme,
+} from "@mui/material";
 
 const GreenCardGallery = () => {
   const [search, setSearch] = useState("");
+  const theme = useTheme();
+
   const cards = [
     {
       id: 1,
       title: "Conquer The Trails: Finding The Perfect Men’s Hiking Footwear",
-      image: "/fashionStory/f1.png", // Place your image inside public/images/
+      image: "/fashionStory/f1.png",
     },
     {
       id: 2,
@@ -30,53 +38,111 @@ const GreenCardGallery = () => {
       image: "/fashionStory/f4.png",
     },
   ];
+
   return (
-    <section className="relative py-24 px-4 bg-white text-center">
-      <h2 className="text-pink-600 text-[32px] font-serif uppercase tracking-wide">
+    <Box
+      component="section"
+      position="relative"
+      py={12}
+      px={2}
+      textAlign="center"
+      bgcolor="white"
+    >
+      {/* Main Heading */}
+      <Typography
+        variant="h4"
+        color="secondary"
+        fontFamily="serif"
+        textTransform="uppercase"
+        sx={{ letterSpacing: 2, color: "#DB2777" }}
+      >
         Experience the Epitome of Refinement – Luxury Fashion Redefined
-      </h2>
-      <p className="text-gray-600 mt-2  text-base font-inter">
+      </Typography>
+
+      <Typography
+        variant="body1"
+        color="text.secondary"
+        mt={1}
+        fontFamily="Inter"
+      >
         Celebrating the most creative fashion — where classic designs never go
         out of style.
-      </p>
+      </Typography>
 
-      {/* LIME GREEN BACKGROUND BAR */}
-      <div className="absolute top-[180px] left-1/2 -translate-x-1/2 w-[1298px] h-[207px] bg-[#C3FF93] rounded-md z-0 shadow-lg" />
+      {/* Lime Green Background Bar */}
+      <Box
+        position="absolute"
+        top={180}
+        left="50%"
+        sx={{
+          transform: "translateX(-50%)",
+          width: { xs: "90%", md: "1298px" },
+          height: "207px",
+          backgroundColor: "#C3FF93",
+          borderRadius: 2,
+          boxShadow: theme.shadows[4],
+          zIndex: 0,
+        }}
+      />
 
-      {/* CARD LIST */}
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-12 px-4">
+      {/* Card Grid */}
+      <Grid
+        container
+        spacing={3}
+        mt={6}
+        position="relative"
+        zIndex={10}
+        maxWidth="lg"
+        mx="auto"
+        px={2}
+      >
         {cards.map((card) => (
-          <div key={card.id} className="flex flex-col items-start relative">
-            {/* TOP TEXT SECTION ON GREEN BAR */}
-            <div className="flex items-start gap-2 px-2 pt-4 pb-2">
-              <div className="text-sm font-medium text-gray-900 leading-snug text-left">
-                <p className="max-w-[190px]">{card.title}</p>
-              </div>
-              <div className="mt-1">
-                <Image
-                  src="/fashionStory/f-arrow.gif"
-                  alt="Arrow"
-                  width={50}
-                  height={50}
-                  // className="w-4 h-4"
-                />
-              </div>
-            </div>
+          <Grid item xs={12} sm={6} md={3} key={card.id}>
+            <Box display="flex" flexDirection="column" alignItems="flex-start">
+              {/* Text + Arrow */}
+              <Box display="flex" alignItems="flex-start" gap={1} px={1} pt={2} pb={1}>
+                <Typography
+                  variant="body2"
+                  fontWeight="medium"
+                  color="text.primary"
+                  lineHeight={1.5}
+                  sx={{ maxWidth: 190, textAlign: "left" }}
+                >
+                  {card.title}
+                </Typography>
+                <Box mt={0.5}>
+                  <Image
+                    src="/fashionStory/f-arrow.gif"
+                    alt="Arrow"
+                    width={30}
+                    height={30}
+                  />
+                </Box>
+              </Box>
 
-            {/* IMAGE SECTION OVERLAPPING GREEN BACKGROUND */}
-            <div className="mt-[-4px] relative w-full h-52 rounded-lg overflow-hidden shadow-md">
-              <Image
-                src={card.image}
-                alt={card.title}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-md"
-              />
-            </div>
-          </div>
+              {/* Card Image */}
+              <Paper
+                elevation={3}
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  height: 208,
+                  borderRadius: 2,
+                  overflow: "hidden",
+                }}
+              >
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </Paper>
+            </Box>
+          </Grid>
         ))}
-      </div>
-    </section>
+      </Grid>
+    </Box>
   );
 };
 

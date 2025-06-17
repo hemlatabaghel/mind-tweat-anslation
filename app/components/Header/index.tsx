@@ -1,79 +1,152 @@
-import Link from "next/link";
-import { FaBars } from "react-icons/fa";
-// import .
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { AppBar, Box, Toolbar, Typography, Stack, IconButton, Button, Grid, useTheme, useMediaQuery } from '@mui/material';
+import { FaBars } from 'react-icons/fa';
+
 const navItems = [
-  "Home",
-  "Latest",
-  "Tech",
-  "Food",
-  "Entertainment",
-  "Health",
-  "Money",
-  "Deals",
-  "Home & Garden",
-  "Hacks",
-  "Fashion",
+  'Home',
+  'Latest',
+  'Tech',
+  'Food',
+  'Entertainment',
+  'Health',
+  'Money',
+  'Deals',
+  'Home & Garden',
+  'Hacks',
+  'Fashion',
 ];
 
 const socialIcons = [
-  { src: "/icons/facebook.png", alt: "Facebook" },
-  { src: "/icons/instagram.png", alt: "Instagram" }, 
-  { src: "/icons/x.png", alt: "X" },
-  { src: "/icons/twitter.png", alt: "Twitter" },
-  { src: "/icons/youtube.png", alt: "YouTube" },
-  // { src: "/icons/email.gif", alt: "Email" },
-  // { src: "/icons/menu.png", alt: "Menu" },
+  { src: '/icons/facebook.png', alt: 'Facebook' },
+  { src: '/icons/instagram.png', alt: 'Instagram' },
+  { src: '/icons/x.png', alt: 'X' },
+  { src: '/icons/twitter.png', alt: 'Twitter' },
+  { src: '/icons/youtube.png', alt: 'YouTube' },
 ];
-export default function Header() {
-    return (
-      <header className="w-full border-b border-gray-100 font-serif">
-      {/* Top Logo + Icons */}
-      <div className="flex justify-between items-center px-8 py-6">
-        {/* Logo */}
-        <h1 className="text-4xl font-extrabold tracking-tight text-black">MIND TWEAT</h1>
 
-        {/* Social Icons with PNGs */}
-        <div className="flex gap-3 items-center">
+export default function Header() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  return (
+    <AppBar
+      position="static"
+      elevation={0}
+      sx={{
+        bgcolor: 'white',
+        borderBottom: '1px solid #eee',
+        color: 'black',
+        fontFamily: 'Playfair Display, serif',
+      }}
+    >
+      {/* Top Logo and Icons */}
+      <Toolbar
+        sx={{
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          py: 3,
+          px: { xs: 2, md: 8 },
+          flexWrap: 'wrap',
+        }}
+      >
+        {/* Logo */}
+        <Typography
+          variant="h4"
+          fontWeight={800}
+          sx={{ flexGrow: 1, fontSize: { xs: 24, sm: 32 } }}
+        >
+          MIND TWEAT
+        </Typography>
+
+        {/* Social Icons */}
+        <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
           {socialIcons.map((icon, index) => (
-            <div
+            <Box
               key={index}
-              className="w-10 h-10 flex items-center justify-center bg-[#D9D9D933] border border-[#C7FF82] rounded-[10px] hover:bg-gray-50 transition"
+              sx={{
+                width: 40,
+                height: 40,
+                bgcolor: 'rgba(217,217,217,0.2)',
+                border: '1px solid #C7FF82',
+                borderRadius: 2,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
               <Image src={icon.src} alt={icon.alt} width={20} height={20} />
-            </div>
+            </Box>
           ))}
-          {/* Pink Email */}
-          <div className="w-10 h-10 flex items-center justify-center bg-pink-400 rounded-[10px] border border-[#C7FF82]">
-          <Image src="/icons/email.gif" alt="email" width={52} height={52} />
-          </div>
-          {/* Pink Menu */}
-          <div className="w-10 h-10 flex items-center justify-center bg-pink-400 rounded-[10px] border border-[#C7FF82]">
-          <FaBars className="text-white" size={16} />
-          </div>
-        </div>
-        
-      </div>
 
-      {/* Navigation */}
-      {/* <nav className="flex justify-center border-t border-b py-3 font-semibold text-sm"> */}
-      <nav className="flex justify-between items-center px-8 py-6 font-semibold text-sm">
-        <ul className="flex flex-wrap justify-center gap-4 uppercase font-semibold text-[14px] leading-[100%]">
+          {/* Pink Email */}
+          <Box
+            sx={{
+              width: 40,
+              height: 40,
+              bgcolor: 'pink',
+              borderRadius: 2,
+              border: '1px solid #C7FF82',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Image src="/icons/email.gif" alt="email" width={26} height={26} />
+          </Box>
+
+          {/* Menu Icon */}
+          <Box
+            sx={{
+              width: 40,
+              height: 40,
+              bgcolor: 'pink',
+              borderRadius: 2,
+              border: '1px solid #C7FF82',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <FaBars color="#fff" size={16} />
+          </Box>
+        </Stack>
+      </Toolbar>
+
+      {/* Navigation Menu */}
+      <Box
+        component="nav"
+        sx={{
+          borderTop: '1px solid #eee',
+          borderBottom: '1px solid #eee',
+          px: { xs: 2, md: 8 },
+          py: 2,
+          overflowX: 'auto',
+        }}
+      >
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+          flexWrap="wrap"
+          sx={{ fontWeight: 600, fontSize: '14px', textTransform: 'uppercase' }}
+        >
           {navItems.map((item, idx) => (
-            <li key={idx}>
-              <Link
-                href={item === "Home" ? "/" : `/${item.toLowerCase().replace(/ & /g, "-")}`}
-                className={`hover:text-pink-600 transition-colors ${
-                  item === "Home" ? "text-pink-600" : "text-black"
-                }`}
-              >
-                {item}
-              </Link>
-            </li>
+            <Link
+              key={idx}
+              href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/ & /g, '-')}`}
+              style={{
+                textDecoration: 'none',
+                color: item === 'Home' ? '#ec4899' : '#000',
+              }}
+            >
+              {item}
+            </Link>
           ))}
-        </ul>
-      </nav>
-    </header>
-    );
-  }
-  
+        </Stack>
+      </Box>
+    </AppBar>
+  );
+}

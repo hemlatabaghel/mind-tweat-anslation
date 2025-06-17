@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Box, Button, Grid, Typography, IconButton } from "@mui/material";
 import { PromoCard } from "../components/common/PromoCard";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const images = [
   "/fashionStory/blog1.png",
@@ -52,98 +55,139 @@ export default function BlogPost() {
   };
 
   return (
-    <div className="py-10 px-4 md:px-20 bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    // <div className="py-10 px-4 md:px-20 bg-white">
+    //   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <Box sx={{ flexGrow: 1, py: 10, px: { xs: 2, md: 5 }, bgcolor: "white" }}>
+    <Grid container spacing={3} alignItems="flex-start">
         {/* Image */}
-        <div className="lg:col-span-5 relative">
+        <Grid item size={6} xs={12} lg={5} sx={{ position: "relative" }}>
           <Image
             src={images[current]}
             alt="Blog Post"
             width={500}
             height={400}
-            className="rounded-lg object-cover w-full"
+            style={{ width: "100%", height: "auto", borderRadius: 8 }}
           />
+
           {/* Arrows */}
-          <button
+          <IconButton
             onClick={prevSlide}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center"
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: 8,
+              transform: "translateY(-50%)",
+              bgcolor: "#f0f0f0",
+            }}
           >
-            ‹
-          </button>
-          <button
+            <ChevronLeftIcon />
+          </IconButton>
+          <IconButton
             onClick={nextSlide}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white w-8 h-8 rounded-full flex items-center justify-center"
+            sx={{
+              position: "absolute",
+              top: "50%",
+              right: 8,
+              transform: "translateY(-50%)",
+              bgcolor: "#333",
+              color: "#fff",
+            }}
           >
-            ›
-          </button>
+            <ChevronRightIcon />
+          </IconButton>
+
           {/* Dots */}
-          <div className="flex justify-center gap-2 mt-2">
+          <Box display="flex" justifyContent="center" gap={1} mt={1}>
             {images.map((_, i) => (
-              <button
+              <Box
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`w-2 h-2 rounded-full ${
-                  i === current ? "bg-orange-500" : "bg-gray-300"
-                }`}
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  bgcolor: i === current ? "orange" : "#ccc",
+                  cursor: "pointer",
+                }}
               />
             ))}
-          </div>
-        </div>
+          </Box>
+        </Grid>
 
-        {/* Content */}
-        <div className="lg:col-span-4">
-          <h2 className="text-lg md:text-xl font-serif font-semibold leading-snug">
-            {blogPosts[0].title}
-          </h2>
-          <p className="text-sm text-gray-700 mt-2 leading-relaxed">
-            {blogPosts[0].excerpt}
-          </p>
-          <p className="text-sm text-gray-700 mt-2 leading-relaxed">
-            {blogPosts[0].excerpt}
-          </p>
-
-          <div className="flex items-center gap-2 justify-center mt-4 md:justify-start">
-            <button className="text-gray-500 font-bold text-lg font-serif">
-              READ MORE
-            </button>
-            <div className="flex-1 h-px bg-orange-300 max-w-[160px]"></div>
-          </div>
-          <div className="flex-1 h-px bg-[#3F4E4F66] max-w-[368px] mt-8 mb-8"></div>
-          <h2 className="text-lg md:text-xl font-serif font-semibold leading-snug">
-            {blogPosts[0].title}
-          </h2>
-          <p className="text-sm text-gray-700 mt-2 leading-relaxed">
-            {blogPosts[0].excerpt}
-          </p>
-
-          <p className="text-sm text-gray-700 mt-2 leading-relaxed">
-            {blogPosts[0].excerpt}
-          </p>
-          <div className="flex items-center gap-2 justify-center mt-4 md:justify-start">
-            <button className="text-gray-500 font-bold text-lg font-serif">
-              READ MORE
-            </button>
-            <div className="flex-1 h-px bg-orange-300 max-w-[160px]"></div>
-          </div>
-        </div>
+  {/* Blog Content */}
+  <Grid item size={3} xs={12} lg={4}>
+          {[0, 0].map((postIndex, idx) => (
+            <Box key={idx} mb={4}>
+              <Typography
+                variant="h6"
+                fontFamily="serif"
+                fontWeight="bold"
+                gutterBottom
+              >
+                {blogPosts[postIndex].title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" paragraph>
+                {blogPosts[postIndex].excerpt}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" paragraph>
+                {blogPosts[postIndex].excerpt}
+              </Typography>
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={2}
+                mt={2}
+                justifyContent={{ xs: "center", md: "flex-start" }}
+              >
+                <Button
+                  variant="text"
+                  sx={{ color: "#555", fontFamily: "serif", fontWeight: "bold" }}
+                >
+                  READ MORE
+                </Button>
+                <Box
+                  sx={{
+                    flex: 1,
+                    height: 1,
+                    maxWidth: 160,
+                    bgcolor: "orange",
+                  }}
+                />
+              </Box>
+              {idx === 0 && (
+                <Box
+                  sx={{
+                    height: 1,
+                    bgcolor: "#3F4E4F66",
+                    maxWidth: 368,
+                    my: 4,
+                  }}
+                />
+              )}
+            </Box>
+          ))}
+        </Grid>
 
         {/* Promo Cards */}
-       
-        <div className="lg:col-span-3 space-y-4">
-          <PromoCard
-            images={promoSet1}
-            bgColor="bg-lime-100"
-            imageRight={false}
-            responsive={true}
-          />
+        <Grid item size={3} xs={12} lg={3}>
+          <Box mb={4}>
+            <PromoCard
+              images={promoSet1}
+              bgColor="#C3FF931A"
+              imageRight={false}
+              responsive={true}
+            />
+          </Box>
           <PromoCard
             images={promoSet2}
-            bgColor="bg-pink-100"
+            bgColor="#FF70AB1A"
             imageRight={false}
             responsive={true}
           />
-        </div>
-      </div>
-    </div>
+        </Grid>
+      {/* </div>
+    </div> */}
+       </Grid>
+    </Box>
   );
 }
