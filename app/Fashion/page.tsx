@@ -1,9 +1,12 @@
+"use client";
+
 import React from "react";
 import SectionLabel from "../components/SectionLabel";
 import FashionSlider from "../components/common/FashionSlider";
 import Image from "next/image";
 import BlogPost from "./BlogPost";
 import RecipeGrid from "../components/RecipeGrid";
+import { Box, Typography, Button, Divider, Grid } from "@mui/material";
 
 const fashionData = [
   {
@@ -28,115 +31,239 @@ const fashionData = [
   },
 ];
 
+const fashionData2 = [
+  {
+    image: "/fashionStory/f2-slide1.png",
+    text: "From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike.",
+  },
+  {
+    image: "/fashionStory/f2-slide2.png",
+    text: "From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike.",
+  },
+  {
+    image: "/fashionStory/f2-slide3.png",
+    text: "From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike.",
+  },
+  {
+    image: "/fashionStory/f2-slide4.png",
+    text: "From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike.",
+  },
+  {
+    image: "/fashionStory/f-slide2.png",
+    text: "From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike.",
+  },
+];
+
 const Fashion = () => {
   return (
     <>
-      <section>
+      <Box component="section">
         <SectionLabel title="Fasion Stories" />
-        <div
-          className={`flex flex-col md:flex-row items-center justify-center gap-10 mt-10 px-8`}
+        <Grid
+          container
+          spacing={4}
+          alignItems="space-between"
+          justifyContent="space-between"
+          sx={{ mt: 4, px: { xs: 2, md: 4 } }}
         >
-          {/* Image and Arrows */}
-          <div className="relative w-[379px] min-w-[379px] h-[491px] mb-8">
-            <img
-              src={`/fashionStory/fashion1.png`}
-              alt="Fashion Story"
-              className="w-full h-full object-cover rounded-xl"
-            />
-            <p className="text-[20px] ml-4 mt-2 font-serif text-justify">
+          <Grid item size={4}  >
+            <Box sx={{ position: "relative", width: 379, height: 491, mb: 2 }}>
+              <Image
+                src={`/fashionStory/fashion1.png`}
+                alt={`Fashion Story `}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-xl"
+                style={{ borderRadius: 12 }}
+              />
+            </Box>
+            <Typography variant="h6" sx={{ ml: 1, fontFamily: "serif" }}>
               STYLE ACCORDING TO YOUR MOOD
-            </p>
-          </div>
+            </Typography>
+          </Grid>
 
-          {/* Text Content */}
-          <div className="md:w-2/3 text-center md:text-left">
-            <h3 className="text-2xl font-bold mb-4 font-serif">
+          <Grid item size={8} sx={{marginTop:"100px"}} >
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              gutterBottom
+              sx={{ fontFamily: "serif" }}
+            >
               STYLE GUIDE AND HOW TO POST
-            </h3>
-            <p className="text-gray-700 text-base mb-4">
-              Get inspired with our styling tips and outfit ideas designed to
-              help you look and feel your best. From seasonal trends to classic
-              essentials, our guide helps you express your style with
-              confidence. Perfect for fashionistas who love to plan their posts.
-            </p>
-            <div className="flex items-center gap-2 justify-center md:justify-start">
-              <button className="text-gray-500 font-bold text-lg font-serif">
+            </Typography>
+            <Typography variant="body1" color="text.secondary" paragraph>
+              Get inspired with our expert styling tips and outfit ideas
+              designed to help you look and feel your best. Whether you're
+              dressing for a special occasion, curating a capsule wardrobe, or
+              learning how to mix textures and prints, our step-by-step guides
+              make fashion easy and approachable.
+            </Typography>
+            <Typography variant="body1" color="text.secondary" paragraph>
+              Get inspired with our expert styling tips and outfit ideas
+              designed to help you look and feel your best. Whether you're
+              dressing for a special occasion, curating a capsule wardrobe, or
+              learning how to mix textures and prints, our step-by-step guides
+              make fashion easy and approachable.
+            </Typography>
+
+            <Box display="flex" alignItems="center" gap={2}>
+              <Button
+                variant="text"
+                sx={{ fontWeight: "bold", fontFamily: "serif", color: "gray" }}
+              >
                 READ MORE
-              </button>
-              <div className="flex-1 h-px bg-orange-300 max-w-[160px]"></div>
-            </div>
-          </div>
-        </div>
+              </Button>
+              <Divider
+                sx={{
+                  flex: 1,
+                  maxWidth: 160,
+                  bgcolor: "orange.300",
+                  height: 1,
+                }}
+              />
+            </Box>
+          </Grid>
+        </Grid>
+
         <FashionSlider items={fashionData} />
 
-        <div
-          className={`flex flex-col md:flex-row items-center justify-center gap-10 mt-10 px-8`}
+        <Grid
+          container
+          spacing={6}
+          alignItems="space-between"
+          justifyContent="space-between"
+          sx={{ mt: 4, px: { xs: 2, md: 4 } }}
         >
-          {/* Image and Arrows */}
-          <div className="relative w-[379px] min-w-[379px] h-[491px] mb-8">
-            <img
-              src={`/fashionStory/fashion2.png`}
-              alt="Fashion Story"
-              className="w-full h-full object-cover rounded-xl"
-            />
-            <p className="text-[20px] ml-4 mt-2 font-serif text-justify">
-              STYLE ACCORDING TO YOUR MOOD
-            </p>
-          </div>
-
-          {/* Text Content */}
-          <div className="md:w-2/3 text-center md:text-left">
-            <h3 className="text-2xl font-bold mb-4 font-serif">
+          <Grid item size={8} sx={{marginTop:"100px"}}>
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              gutterBottom
+              sx={{ fontFamily: "serif" }}
+            >
               STYLE GUIDE AND HOW TO POST
-            </h3>
-            <p className="text-gray-700 text-base mb-4">
-              Get inspired with our styling tips and outfit ideas designed to
-              help you look and feel your best. From seasonal trends to classic
-              essentials, our guide helps you express your style with
-              confidence. Perfect for fashionistas who love to plan their posts.
-            </p>
-            <div className="flex items-center gap-2 justify-center md:justify-start">
-              <button className="text-gray-500 font-bold text-lg font-serif">
+            </Typography>
+            <Typography variant="body1" color="text.secondary" paragraph>
+              Get inspired with our expert styling tips and outfit ideas
+              designed to help you look and feel your best. Whether you're
+              dressing for a special occasion, curating a capsule wardrobe, or
+              learning how to mix textures and prints, our step-by-step guides
+              make fashion easy and approachable.
+            </Typography>
+            <Typography variant="body1" color="text.secondary" paragraph>
+              Get inspired with our expert styling tips and outfit ideas
+              designed to help you look and feel your best. Whether you're
+              dressing for a special occasion, curating a capsule wardrobe, or
+              learning how to mix textures and prints, our step-by-step guides
+              make fashion easy and approachable.
+            </Typography>
+
+            <Box display="flex" alignItems="center" gap={2}>
+              <Button
+                variant="text"
+                sx={{ fontWeight: "bold", fontFamily: "serif", color: "gray" }}
+              >
                 READ MORE
-              </button>
-              <div className="flex-1 h-px bg-orange-300 max-w-[160px]"></div>
-            </div>
-          </div>
-        </div>
-        <FashionSlider items={fashionData} />
-      </section>
+              </Button>
+              <Divider
+                sx={{
+                  flex: 1,
+                  maxWidth: 160,
+                  bgcolor: "orange.300",
+                  height: 1,
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid item size={4}>
+            <Box sx={{ position: "relative", width: 379, height: 491, mb: 2 }}>
+              <Image
+                src={`/fashionStory/fashion2.png`}
+                alt={`Fashion Story `}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-xl"
+                style={{ borderRadius: 12 }}
+              />
+            </Box>
+            <Typography variant="h6" sx={{ ml: 1, fontFamily: "serif" }}>
+              STYLE ACCORDING TO YOUR MOOD
+            </Typography>
+          </Grid>
+        </Grid>
 
-      <section className="py-12 px-4 md:px-20">
-        {/* Header Image and Title */}
-        <div className="relative mb-8 max-w-5xl mx-auto">
-          <Image
-            src="/fashionStory/f-girls.png"
-            alt="Luxury Header"
-            width={1036}
-            height={442}
-            className="rounded-md mx-auto w-full max-w-full object-cover"
-          />
-          <h2 className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-center text-lg sm:text-xl md:text-3xl font-serif font-semibold px-4">
-            EXPERIENCE THE EPITOME OF REFINEMENT – LUXURY FASHION REDEFINED
-          </h2>
-        </div>
+        <FashionSlider items={fashionData2} />
+      </Box>
 
-        {/* Description */}
-        <div className="max-w-xxl mx-auto text-justify text-sm md:text-base text-gray-800 space-y-4">
-          <p>
-            Get inspired with our expert styling tips and outfit ideas designed
-            to help you look and feel your best. Whether you're dressing for a
-            special occasion, curating a capsule wardrobe, or learning how to
-            mix textures and prints, our step-by-step guides make fashion easy
-            and approachable.
-          </p>
-          <p>
-            From layering essentials to seasonal must-haves, we break down the
-            latest looks and show you how to make them your own — using pieces
-            from our collection.
-          </p>
-        </div>
-      </section>
+      <Box
+      component="section"
+      sx={{
+        py: 12,
+        px: { xs: 2, md: 5 },
+      }}
+    >
+      {/* Header Image with Title */}
+      <Box
+        sx={{
+          position: "relative",
+          mb: 8,
+          maxWidth: "1080px",
+          mx: "auto",
+        }}
+      >
+        <Image
+          src="/fashionStory/f-girls.png"
+          alt="Luxury Header"
+          width={1036}
+          height={442}
+          style={{
+            borderRadius: "8px",
+            width: "100%",
+            height: "auto",
+            objectFit: "cover",
+          }}
+        />
+        <Typography
+          variant="h2"
+          sx={{
+            position: "absolute",
+            bottom: 16,
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "white",
+            textAlign: "center",
+            fontSize: { xs: "1rem", sm: "1.25rem", md: "2rem" },
+            fontFamily: "serif",
+            fontWeight: 600,
+            px: 2,
+          }}
+        >
+          EXPERIENCE THE EPITOME OF REFINEMENT – LUXURY FASHION REDEFINED
+        </Typography>
+      </Box>
+
+      {/* Description */}
+      <Box
+        sx={{
+          maxWidth: "100%",
+          mx: "auto",
+          textAlign: "justify",
+          color: "text.primary",
+          fontSize: { xs: "0.875rem", md: "1rem" },
+          lineHeight: 1.8,
+          "& > p": {
+            mb: 2,
+          },
+        }}
+      >
+        <Typography component="p">
+        Get inspired with our expert styling tips and outfit ideas designed to help you look and feel your best. Whether you're dressing for a special occasion, curating a capsule wardrobe, or learning how to mix textures and prints, our step-by-step guides make fashion easy and approachable.
+        </Typography>
+        <Typography component="p">
+        From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike. From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike.
+        </Typography>
+      </Box>
+    </Box>
 
       <BlogPost />
       <RecipeGrid />

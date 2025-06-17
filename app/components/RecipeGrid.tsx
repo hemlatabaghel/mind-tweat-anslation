@@ -1,157 +1,354 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import SectionLabel from "./SectionLabel";
 import Image from "next/image";
-import { useState } from "react";
+import {
+  Box,
+  Typography,
+  Grid,
+  Button,
+  IconButton,
+  useTheme,
+  InputBase,
+} from "@mui/material";
 
 const RecipeGrid = () => {
+  const theme = useTheme();
   const [search, setSearch] = useState("");
+
   return (
-    <section className="bg-white py-16 px-4">
-      <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* === LEFT CONTENT === */}
-        <div className="lg:col-span-9">
-          <SectionLabel title="EXPERIENCE IT" />
-          <p className="text-gray-700 mb-4 mt-10 ml-6">
-            Step into the heart of the home with our curated cooking content —
-            where delicious ideas come to life. Whether you're a beginner in the
-            kitchen or a seasoned home chef, you'll find easy-to-follow recipes,
-            time-saving hacks, and smart kitchen tips that turn everyday meals
-            into memorable moments.
-          </p>
-          <div className="flex items-center gap-2 justify-center md:justify-start">
-            <button className="text-gray-500 font-bold text-lg font-serif ml-6 mb-6">
-              READ MORE
-            </button>
-            <div className="flex-1 h-px bg-orange-300 max-w-[160px]"></div>
-          </div>
+    <Box sx={{ backgroundColor: "#fff", py: 6, px: 2 , flexGrow: 1 }}>
+      <Grid
+        container spacing={3} columns={16}
+      
+      >
+        {/* LEFT COLUMN */}
+        <Grid item  size={10}>
+          <Box sx={{ px: { xs: 1, sm: 3, md: 4 }, py: 2 }}>
+            <SectionLabel title="EXperiance IT" />
+            <Typography
+            mt={4}
+              variant="body1"
+              color="text.secondary"
+              sx={{ maxWidth: "90%", mb: 3 }}
+            >
+              Step into the heart of the home with our curated cooking content — where delicious ideas come to life. Whether you're a beginner in the kitchen or a seasoned home chef, you'll find easy-to-follow recipes, time-saving hacks, and smart kitchen tips that turn everyday meals into memorable moments.
+            </Typography>
 
-          {/* === GRID OF RECIPE CARDS === */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-[#ECF4C8] p-4 rounded-md ml-6">
-            {Array(6)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className="relative h-56 rounded-md overflow-hidden shadow-md group"
-                >
-                  <img
-                    src={`/EX/recipe${i + 1}.png`} // <-- Use your actual image paths
-                    alt={`Recipe ${i + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                    <button className="w-10 h-10 bg-black rounded-full flex items-center justify-center shadow-lg">
+            {/* READ MORE */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                justifyContent: { xs: "center", md: "flex-start" },
+                mb: 4,
+              }}
+            >
+              <Button
+                disableRipple
+                sx={{
+                  fontSize: "1.125rem",
+                  fontWeight: "bold",
+                  color: "gray",
+                  fontFamily: "serif",
+                  textTransform: "none",
+                  px: 0,
+                  "&:hover": { backgroundColor: "transparent" },
+                }}
+              >
+                READ MORE
+              </Button>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  height: "1px",
+                  maxWidth: "160px",
+                  backgroundColor: "#FDBA74",
+                }}
+              />
+            </Box>
+
+            {/* RECIPE GRID */}
+            {/* <Box sx={{ flexGrow: 1 ,}}>
+              <Grid container spacing={2} columns={16}>
+                <Grid size={8}>
+
+                </Grid>
+                <Grid size={8}>
+
+                </Grid>
+              </Grid>
+            </Box> */}
+            <Box sx={{ backgroundColor: "#ECF4C8", p: 2, borderRadius: 2 }}>
+              <Grid container spacing={2}>
+                {[...Array(6)].map((_, i) => (
+                  <Grid item xs={12} sm={6} md={4} key={i}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        height: 224,
+                        borderRadius: 2,
+                        overflow: "hidden",
+                        boxShadow: 3,
+                        "&:hover .hoverOverlay": { opacity: 1 },
+                      }}
+                    >
                       <img
-                        src="/EX/vectorVedio.png"
-                        alt="Play"
-                        className="w-4 h-4 "
+                        src={`/EX/recipe${i + 1}.png`}
+                        alt={`Recipe ${i + 1}`}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          display: "block",
+                        }}
                       />
-                    </button>
-                  </div>
-                  <div className="absolute bottom-2 left-2 text-white text-sm font-semibold drop-shadow-md">
-                    Where Every Recipe Tells a Story
-                  </div>
-                </div>
-              ))}
-          </div>
+                      <Box
+                        className="hoverOverlay"
+                        sx={{
+                          position: "absolute",
+                          inset: 0,
+                          backgroundColor: "rgba(0,0,0,0.25)",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          opacity: 0,
+                          transition: "opacity 0.3s ease",
+                        }}
+                      >
+                        <IconButton
+                          sx={{
+                            width: 40,
+                            height: 40,
+                            backgroundColor: "#000",
+                            borderRadius: "50%",
+                            boxShadow: 3,
+                            "&:hover": { backgroundColor: "#111" },
+                          }}
+                        >
+                          <img
+                            src="/EX/vectorVedio.png"
+                            alt="Play"
+                            style={{ width: 16, height: 16 }}
+                          />
+                        </IconButton>
+                      </Box>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          position: "absolute",
+                          bottom: 8,
+                          left: 8,
+                          color: "#fff",
+                          fontWeight: "bold",
+                          textShadow: "1px 1px 4px rgba(0,0,0,0.7)",
+                        }}
+                      >
+                        Where Every Recipe Tells a Story
+                      </Typography>
+                    </Box>
+                  </Grid>
+                ))}
+              </Grid>
 
-          {/* === PAGINATION DOTS === */}
-          <div className="flex justify-center mt-4 space-x-2">
-            {[0, 1, 2, 3, 4].map((d, i) => (
-              <span
-                key={i}
-                className={`w-3 h-3 rounded-full ${
-                  i === 2 ? "bg-gray-900" : "bg-gray-300"
-                }`}
-              ></span>
-            ))}
-          </div>
-        </div>
+              {/* PAGINATION DOTS */}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  mt: 3,
+                  gap: 1,
+                }}
+              >
+                {[0, 1, 2, 3, 4].map((dot, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: index === 2 ? "#111827" : "#D1D5DB",
+                    }}
+                  />
+                ))}
+              </Box>
+            </Box>
+          </Box>
+        </Grid>
 
-        {/* === SIDEBAR === */}
-        <aside className="lg:col-span-3 bg-[#FFF7EE] p-4 rounded-xl border border-dashed border-orange-200 shadow-sm">
-          {/* Title with Icon */}
-          <div className="flex items-center gap-2 mb-3">
-            <img
+        {/* RIGHT SIDEBAR */}
+        <Grid
+          item
+          size={6}
+          mt={2}
+
+          sx={{
+            bgcolor: "#FFF7EE",
+            p: 2,
+            borderRadius: 2,
+            border: "1px dashed #FFB74D",
+            boxShadow: 1,
+          }}
+        >
+          <Box display="flex" alignItems="center" gap={1.5} mb={2}>
+            <Box
+              component="img"
               src="/mainStories/freshicon.gif"
               alt="Fresh Icon"
-              className="w-5 h-5"
-              width={31}
-              height={31}
-            />{" "}
-            {/* Replace with correct icon path */}
-            <h3 className="text-[#FF6B00] font-semibold text-xl">FRESH!</h3>
-          </div>
+              width={24}
+              height={24}
+            />
+            <Typography variant="h6" fontWeight="bold" color="#FF6B00">
+              FRESH!
+            </Typography>
+          </Box>
 
-          {/* Search Bar */}
-          <div className="flex items-center bg-[#FFF0D9] border border-[#B9B18D] rounded-lg overflow-hidden mb-4">
-            <div className="bg-[#96A882] p-2 flex items-center justify-center rounded-l-lg">
-              <img
+          {/* SEARCH BAR */}
+          <Box
+            display="flex"
+            alignItems="center"
+            bgcolor="#FFF0D9"
+            border="1px solid #B9B18D"
+            borderRadius={2}
+            overflow="hidden"
+            mb={3}
+          >
+            <Box
+              sx={{
+                backgroundColor: "#96A882",
+                p: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderTopLeftRadius: 8,
+                borderBottomLeftRadius: 8,
+              }}
+            >
+              <Box
+                component="img"
                 src="/mainStories/search.gif"
                 alt="Search"
-                className="w-6 h-6"
+                width={24}
+                height={24}
               />
-            </div>
-            <input
-              type="text"
+            </Box>
+            <InputBase
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full px-3 py-2 bg-[#FFF0D9] text-sm focus:outline-none"
+              sx={{
+                px: 2,
+                py: 1,
+                flex: 1,
+                fontSize: 14,
+                backgroundColor: "#FFF0D9",
+              }}
             />
-          </div>
+          </Box>
 
-          {/* Promo Cards */}
-          <div className="space-y-4">
-            {Array(5)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className=" px-3 py-2  border-b-1 border-[#D9D9D980]   flex gap-3"
-                >
-                  <img
-                    src={`/EX/ex_${i + 1}.png`} // Update with actual promo images
-                    alt={`Promo ${i + 1}`}
-                    className="w-20 h-20 object-cover rounded-md flex-shrink-0"
-                  />
-                  <div className="flex flex-col justify-between text-[12px]">
-                    <p className="text-[#FF6B00] font-semibold leading-snug">
-                      Enjoy hot deals on travel essentials, gadgets, fashion,
-                      and more —{" "}
-                      <span className="font-bold">
-                        for a limited time only.
-                      </span>
-                    </p>
-                    <ul className="text-[11px] text-gray-600 mt-1 list-disc list-inside space-y-0.5 leading-snug">
-                      <li>Save up to 60%</li>
-                      <li>Limited-time offers</li>
-                      <li>Free shipping available</li>
-                    </ul>
-                    <button className="flex items-center gap-2 text-xs mt-3 bg-orange-400 text-white px-3 py-1 rounded shadow">
-  <Image src="/mainStories/export.gif" alt="arrow" width={8} height={8} />
-  Explore Now
-</button>
-                  </div>
-                </div>
-              ))}
-          </div>
-
-          {/* Pagination Dots */}
-          <div className="flex justify-center mt-6 space-x-1">
-            {[0, 1, 2].map((d, i) => (
-              <span
+          {/* SIDEBAR CARDS */}
+          <Box display="flex" flexDirection="column" gap={2}>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Box
                 key={i}
-                className={`w-2 h-2 rounded-full ${
-                  i === 0 ? "bg-[#FF6B00]" : "bg-orange-200"
-                }`}
-              ></span>
+                display="flex"
+                gap={2}
+                borderBottom="1px solid #D9D9D980"
+                pb={1}
+              >
+                <Box
+                  component="img"
+                  src={`/EX/ex_${i + 1}.png`}
+                  alt={`Promo ${i + 1}`}
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 2,
+                    objectFit: "cover",
+                    flexShrink: 0,
+                  }}
+                />
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="space-between"
+                  fontSize={12}
+                >
+                  <Typography
+                    color="#FF6B00"
+                    fontWeight={600}
+                    fontSize={12}
+                    lineHeight={1.3}
+                  >
+                    Enjoy hot deals on travel essentials, gadgets, fashion, and
+                    more —{" "}
+                    <Box component="span" fontWeight="bold">
+                      for a limited time only.
+                    </Box>
+                  </Typography>
+                  <ul
+                    style={{
+                      fontSize: "11px",
+                      color: "#4B5563",
+                      marginTop: 4,
+                      paddingLeft: 16,
+                      lineHeight: "1.2",
+                    }}
+                  >
+                    <li>🏖️ Up to 50% off</li>
+                    <li>🧳 Travel-ready gear and accessories</li>
+                    <li>📱 Must-have tech for summer adventures</li>
+                    <li> 🎉 New deals dropping daily!</li>
+                  </ul>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    sx={{
+                      mt: 1,
+                      bgcolor: "orange",
+                      color: "white",
+                      textTransform: "none",
+                      px: 2,
+                      py: 0.5,
+                      fontSize: 11,
+                      boxShadow: 1,
+                      width: "fit-content",
+                    }}
+                    startIcon={
+                      <Box
+                        component="img"
+                        src="/mainStories/export.gif"
+                        alt="arrow"
+                        width={10}
+                        height={10}
+                      />
+                    }
+                  >
+                    Explore Now
+                  </Button>
+                </Box>
+              </Box>
             ))}
-          </div>
-        </aside>
-      </div>
-    </section>
+          </Box>
+
+          {/* PAGINATION DOTS */}
+          <Box display="flex" justifyContent="center" mt={4} gap={1}>
+            {[0, 1, 2].map((dot, i) => (
+              <Box
+                key={i}
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  bgcolor: i === 0 ? "#FF6B00" : "orange.100",
+                }}
+              />
+            ))}
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

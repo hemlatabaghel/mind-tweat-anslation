@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 
 interface SliderItem {
   image: string;
@@ -20,6 +21,7 @@ export default function FashionSlider({
   rightArrow = "/icons/Arrow.png",
 }: FashionSliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
 
   const scroll = (dir: "left" | "right") => {
     if (sliderRef.current) {
@@ -32,50 +34,119 @@ export default function FashionSlider({
   };
 
   return (
-    <section className="relative w-full px-4 md:px-10 py-10">
-      <div className="relative max-w-screen-xl mx-auto">
+    <Box
+      component="section"
+      sx={{
+        position: "relative",
+        width: "100%",
+        px: { xs: 2, md: 6 },
+        py: 6,
+      }}
+    >
+      <Box
+        sx={{
+          position: "relative",
+          maxWidth: "1440px",
+          mx: "auto",
+        }}
+      >
         {/* Left Arrow */}
-        <button
+        <IconButton
           onClick={() => scroll("left")}
-          className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md rounded-full p-2"
+          sx={{
+            position: "absolute",
+            left: -24,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 2,
+            bgcolor: "white",
+            boxShadow: 2,
+            p: 1,
+            borderRadius: "50%",
+          }}
         >
-          <Image src={leftArrow} alt="left" width={28} height={28} className="rotate-180" />
-        </button>
+          <Image src={leftArrow} alt="left" width={28} height={28} style={{ transform: "rotate(180deg)" }} />
+        </IconButton>
 
         {/* Scrollable Items */}
-        <div
+        <Box
           ref={sliderRef}
-          className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar px-2"
+          sx={{
+            display: "flex",
+            gap: 3,
+            overflowX: "auto",
+            scrollBehavior: "smooth",
+            px: 1,
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+            scrollbarWidth: "none",
+          }}
         >
           {items.map((item, idx) => (
-            <div
+            <Box
               key={idx}
-              className="flex-shrink-0 w-[300px] xl:w-[320px] rounded-xl"
+              sx={{
+                flexShrink: 0,
+                width: { xs: 280, sm: 300, xl: 320 },
+                borderRadius: 2,
+              }}
             >
-              <div className="w-full h-[420px] overflow-hidden rounded-xl shadow-md">
+              <Box
+                sx={{
+                  width: "100%",
+                  height: 420,
+                  borderRadius: 2,
+                  overflow: "hidden",
+                  boxShadow: 3,
+                }}
+              >
                 <Image
                   src={item.image}
                   alt={`Fashion ${idx + 1}`}
                   width={320}
                   height={420}
-                  className="w-full h-full object-cover"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
                 />
-              </div>
-              <p className="mt-3 text-sm text-justify px-1 leading-relaxed text-gray-800">
+              </Box>
+              <Typography
+                variant="body2"
+                sx={{
+                  mt: 2,
+                  textAlign: "justify",
+                  px: 1,
+                  color: "text.primary",
+                  lineHeight: 1.7,
+                }}
+              >
                 {item.text}
-              </p>
-            </div>
+              </Typography>
+            </Box>
           ))}
-        </div>
+        </Box>
 
         {/* Right Arrow */}
-        <button
+        <IconButton
           onClick={() => scroll("right")}
-          className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md rounded-full p-2"
+          sx={{
+            position: "absolute",
+            right: -24,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 2,
+            bgcolor: "white",
+            boxShadow: 2,
+            p: 1,
+            borderRadius: "50%",
+          }}
         >
           <Image src={rightArrow} alt="right" width={28} height={28} />
-        </button>
-      </div>
-    </section>
+        </IconButton>
+      </Box>
+    </Box>
   );
 }

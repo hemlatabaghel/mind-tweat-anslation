@@ -6,6 +6,10 @@ import Header from "./components/Headers";
 import Footer from "./components/footer/Footer";
 import Brands from "./components/footer/Brands";
 import Newsletter from "./components/footer/Newsletter";
+// import theme from "./theme/Theme";
+import { ThemeProvider } from "@emotion/react";
+import ThemeRegistry from "./theme/ThemeRegistry";
+import CssBaseline from '@mui/material/CssBaseline';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
@@ -25,12 +29,20 @@ export default function RootLayout({
     <html lang="en">
       <body
       
-       className={`${inter.variable} ${playfair.variable}`}>
+      className={`${inter.variable} ${playfair.variable}`}>
+        {/* <ThemeProvider> */}
+        <ThemeRegistry>
+        <CssBaseline/>
         <Header/>
         {children}
         <Brands/> 
         <Newsletter/>
         <Footer/>
+        </ThemeRegistry>
+       
+
+        {/* </ThemeProvider> */}
+        
       </body>
     </html>
   );

@@ -1,51 +1,64 @@
-const Footer = () => {
-    return (
-      <footer className="bg-[#C3FF93] px-4 pt-36 pb-5 text-sm relative z-0"> {/* Padding top adjusted to accommodate newsletter overlap */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
-          <div>
-            <h4 className="font-bold text-[32px] font-[inter] mb-1">MIND TWEAT</h4>
-            <p className="text-[16px] font-[inter] mb-4">Echoes of Thought. <br /> Powered by Tweets.</p>
-            <div className="font-bold text-[20px] font-[inter] mb-1 mt-12">
-            <h5 className=" mb-4">Follow US On </h5>
-            </div>
-            <div className="flex gap-4 text-xl">
+// app/components/Footer.tsx
+'use client';
 
-            <a href="https://facebook.com"><img src="/icons/vectorFB.png" alt="Facebook" className="h-5 w-5" /></a>
-            <a href="https://pinterest.com"><img src="/icons/vectorP.png" alt="Pinterest" className="h-5 w-5" /></a>
-            <a href="https://twitter.com"><img src="/icons/vectorX.png" alt="X/Twitter" className="h-5 w-5" /></a>
-            <a href="https://linkedin.com"><img src="/icons/vectorIN.png" alt="LinkedIn" className="h-5 w-5" /></a>
-            </div>
-          </div>
-  
-          <div className="text-base font-[500]">
-          <a href="#" className="block">Home</a>
-          <a href="#" className="block">About Us</a>
-          <a href="#" className="block">Projects</a>
-          <a href="#" className="block">Services</a>
-          <a href="#" className="block">Social</a>
-          <a href="#" className="block">Live Chat</a>
-          <a href="#" className="block">Privacy Policy</a>
-          <a href="#" className="block">Mobile</a>
-          </div>
-  
-          <div className="text-base font-[500]">
-          <a href="#" className="block">Social</a>
-          <a href="#" className="block">Live Chat</a>
-          <a href="#" className="block">Privacy Policy</a>
-          <a href="#" className="block">Mobile</a>
-          <a href="#" className="block">Lifestyle</a>
-          <a href="#" className="block">Beauty</a>
-          </div>
-  
-          <div className="text-base font-[500]">
-          <a href="#" className="block">Privacy Policy</a>
-          <a href="#" className="block">Mobile</a>
-          <a href="#" className="block">Lifestyle</a>
-          <a href="#" className="block">Beauty</a>
-          </div>
-        </div>
-      </footer>
-    );
-  };
-  
-  export default Footer;
+import { Box, Container, Grid, Typography, Link as MuiLink, Stack } from '@mui/material';
+import Image from 'next/image';
+
+const Footer = () => {
+  return (
+    <Box sx={{ backgroundColor: '#C3FF93', pt: 20, pb: 5, zIndex: 0, position: 'relative' }}>
+      <Container maxWidth="lg">
+        <Grid container spacing={4} justifyContent="space-between">
+          {/* Left Column */}
+          <Grid item xs={12} md={3}>
+            <Typography variant="h4" fontWeight="bold" fontFamily="Inter" gutterBottom>
+              MIND TWEAT
+            </Typography>
+            <Typography fontSize={16} fontFamily="Inter" gutterBottom>
+              Echoes of Thought. <br />
+              Powered by Tweets.
+            </Typography>
+
+            <Typography fontWeight="bold" fontSize={20} fontFamily="Inter" mt={4} mb={2}>
+              Follow Us On
+            </Typography>
+
+            <Stack direction="row" spacing={2}>
+              <MuiLink href="https://facebook.com" target="_blank" rel="noopener">
+                <Image src="/icons/vectorFB.png" alt="Facebook" width={20} height={20} />
+              </MuiLink>
+              <MuiLink href="https://pinterest.com" target="_blank" rel="noopener">
+                <Image src="/icons/vectorP.png" alt="Pinterest" width={20} height={20} />
+              </MuiLink>
+              <MuiLink href="https://twitter.com" target="_blank" rel="noopener">
+                <Image src="/icons/vectorX.png" alt="X/Twitter" width={20} height={20} />
+              </MuiLink>
+              <MuiLink href="https://linkedin.com" target="_blank" rel="noopener">
+                <Image src="/icons/vectorIN.png" alt="LinkedIn" width={20} height={20} />
+              </MuiLink>
+            </Stack>
+          </Grid>
+
+          {/* Link Columns */}
+          {[
+            ['Home', 'About Us', 'Projects', 'Services', 'Social', 'Live Chat', 'Privacy Policy', 'Mobile'],
+            ['Social', 'Live Chat', 'Privacy Policy', 'Mobile', 'Lifestyle', 'Beauty'],
+            ['Privacy Policy', 'Mobile', 'Lifestyle', 'Beauty']
+          ].map((links, index) => (
+            <Grid key={index} item xs={12} md={3}>
+              <Stack spacing={1}>
+                {links.map((text, i) => (
+                  <MuiLink key={i} href="#" underline="none" fontWeight={500} color="inherit">
+                    {text}
+                  </MuiLink>
+                ))}
+              </Stack>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
+  );
+};
+
+export default Footer;

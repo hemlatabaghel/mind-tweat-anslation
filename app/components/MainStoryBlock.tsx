@@ -2,24 +2,41 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
-import SectionLabel from "./SectionLabel";
+import SectionTitle from "./SectionLabel";
 import FreshDealsCard from "./SideBar/FreshDealsCard";
 import TechStories from "./TechStories";
 const stories = [
     {
       id: 1,
       title: "Apple Unveils M4 iPad Pro: Thinner, Faster, Smarter",
-      img: "/mainStories/ipad3.png",
+      img: "/mainStories/ipad1.png",
     },
     {
       id: 2,
       title: "Apple Unveils M4 iPad Pro: Thinner, Faster, Smarter",
-      img: "/mainStories/ipad3.png",
+      img: "/mainStories/ipad1.png",
     },
     {
       id: 3,
       title: "Apple Unveils M4 iPad Pro: Thinner, Faster, Smarter",
-      img: "/mainStories/ipad3.png",
+      img: "/mainStories/ipad1.png",
+    },
+  ];
+  const dummyStories = [
+    {
+      image: '/mainStories/tech1.png',
+      title: 'DATA INFRASTRUCTURE AND ANALYTICS',
+      description: 'Data Infrastructure and Analytics refers to the combination of technologies, processes, and frameworks that enable organizations to collect, store, manage, process, and analyze data to extract meaningful insights and support data-driven decision-making.',
+    },
+    {
+      image: '/mainStories/tech2.png',
+      title: 'DATA INFRASTRUCTURE AND ANALYTICS',
+      description: 'Data Infrastructure and Analytics refers to the combination of technologies, processes, and frameworks that enable organizations to collect, store, manage, process, and analyze data to extract meaningful insights and support data-driven decision-making.',
+    },
+    {
+      image: '/mainStories/tech3.png',
+      title: 'DATA INFRASTRUCTURE AND ANALYTICS',
+      description: 'Data Infrastructure and Analytics refers to the combination of technologies, processes, and frameworks that enable organizations to collect, store, manage, process, and analyze data to extract meaningful insights and support data-driven decision-making.',
     },
   ];
   const styleItems = [
@@ -49,7 +66,7 @@ const MainStoryBlock = () => {
           <div className="lg:col-span-2 space-y-12">
             {/* MAIN STORY */}
             <div>
-              <SectionLabel title="Main Stories" />
+              <SectionTitle title="Main Stories" />
               <div className="flex flex-wrap gap-4 mt-4">
                 <div className="flex gap-4 w-1/2">
                   {stories.map((story) => (
@@ -84,7 +101,7 @@ const MainStoryBlock = () => {
                 </div>
               </div>
             </div>
-            <TechStories/>
+            <TechStories techStories={dummyStories} activeIndex={0} />
    
           </div>
 

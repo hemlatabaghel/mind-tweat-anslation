@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Box, Typography, Button, useMediaQuery } from "@mui/material";
 
 interface PromoCardProps {
   images: string[];
@@ -10,71 +11,131 @@ interface PromoCardProps {
   responsive?: boolean;
 }
 
-export function PromoCard({ images, bgColor, imageRight = false, responsive = false }: PromoCardProps) {
+export function PromoCard({
+  images,
+  bgColor,
+  imageRight = false,
+  responsive = false,
+}: PromoCardProps) {
   const [current, setCurrent] = useState(0);
+  const isSmall = useMediaQuery("(max-width:600px)");
 
   const handleDotClick = (index: number) => {
     setCurrent(index);
   };
 
-  return (
-    <div className={`p-4 rounded-xl border border-gray-200 ${bgColor}`}>
-      <h3 className="font-serif text-lg font-bold mb-4">STYLE THAT SPEAKS</h3>
-      <div
-        className={`flex items-start gap-4 ${responsive ? "flex-col sm:flex-row" : ""} ${imageRight ? "sm:flex-row-reverse" : ""}`}
+  const imageBox = (
+    <Box>
+      <Box
+        sx={{
+          width: 134,
+          height: 134,
+          position: "relative",
+          borderRadius: 2,
+          overflow: "hidden",
+          flexShrink: 0,
+        }}
       >
-        <div className="flex-shrink-0">
-          <Image
-            src={images[current]}
-            alt={`Promo ${current + 1}`}
-            width={134}
-            height={134}
-            className="rounded-md object-cover"
-          />
-          <div className="flex justify-center gap-2 mt-2">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full ${
-                  index === current ? "bg-gray-800" : "bg-gray-300"
-                }`}
-                onClick={() => handleDotClick(index)}
-              ></button>
-            ))}
-          </div>
-        </div>
+        <Image
+          src={images[current]}
+          alt={`Promo ${current + 1}`}
+          fill
+          style={{ objectFit: "cover", borderRadius: "8px" }}
+        />
+      </Box>
 
-        <div>
-          <p className="text-xs text-black mb-2 leading-snug">
+      {/* Dots */}
+      <Box display="flex" justifyContent="center" gap={1} mt={1}>
+        {images.map((_, index) => (
+          <Box
+            key={index}
+            component="button"
+            onClick={() => handleDotClick(index)}
+            sx={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              backgroundColor: index === current ? "#333" : "#ccc",
+              border: "none",
+              cursor: "pointer",
+              p: 0,
+            }}
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+
+  return (
+    <Box
+      sx={{
+        p: 2,
+        borderRadius: 2,
+        border: "1px solid #e5e7eb",
+        backgroundColor: bgColor,
+      }}
+    >
+      <Typography variant="h6" fontFamily="serif" fontWeight="bold" mb={2}>
+        STYLE THAT SPEAKS
+      </Typography>
+
+      <Box
+        display="flex"
+        flexDirection={
+          responsive
+            ? isSmall
+              ? "column"
+              : imageRight
+              ? "row-reverse"
+              : "row"
+            : imageRight
+            ? "row-reverse"
+            : "row"
+        }
+        gap={2}
+        alignItems="flex-start"
+      >
+        {imageBox}
+
+        <Box>
+          <Typography variant="body2" color="black" mb={1} lineHeight={1.4}>
             Enjoy hot deals on travel essentials, gadgets, fashion, and more — for a limited time only.
-          </p>
-          {/* <ul className="text-xs text-black list-none ml-5 space-y-1">
-            <li> 🏖️ Up to 50% off</li>
-            <li>🧳 Travel-ready gear and accessories</li>
-            <li>📱 Must-have tech for summer adventures</li>
-            <li>  🎉 New deals dropping daily!</li>
-          </ul> */}
-           <ul className="list-none space-y-1 mt-1 text-[8px]">
-                  <li className="flex items-start gap-1">
-                    <span className="text-sm">🔺</span> Up to 50% off
-                  </li>
-                  <li className="flex items-start gap-1">
-                    <span className="text-sm">👜</span> Travel-ready gear and
-                    accessories
-                  </li>
-                  <li className="flex items-start gap-1">
-                    <span className="text-sm">🌞</span> Must-have tech for
-                    summer adventures
-                  </li>
-                  <li className="flex items-start gap-1">
-                    <span className="text-sm">🆕</span> New deals dropping daily
-                  </li>
-                </ul>
-          <button className="text-xs mt-3 bg-orange-400 text-white px-3 py-1 rounded shadow">
+          </Typography>
+
+          <Box component="ul" sx={{ pl: 0, listStyle: "none", mt: 1, fontSize: 10 }}>
+            <li style={{ display: "flex", alignItems: "start", gap: 4 }}>
+              <span style={{ fontSize: "0.875rem" }}>🔺</span> Up to 50% off
+            </li>
+            <li style={{ display: "flex", alignItems: "start", gap: 4 }}>
+              <span style={{ fontSize: "0.875rem" }}>👜</span> Travel-ready gear and accessories
+            </li>
+            <li style={{ display: "flex", alignItems: "start", gap: 4 }}>
+              <span style={{ fontSize: "0.875rem" }}>🌞</span> Must-have tech for summer adventures
+            </li>
+            <li style={{ display: "flex", alignItems: "start", gap: 4 }}>
+              <span style={{ fontSize: "0.875rem" }}>🆕</span> New deals dropping daily
+            </li>
+          </Box>
+
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              mt: 2,
+              backgroundColor: "#fb923c",
+              color: "white",
+              px: 2,
+              py: 0.5,
+              fontSize: 12,
+              boxShadow: 1,
+              textTransform: "none",
+              borderRadius: 1,
+            }}
+          >
             Explore Now
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 }

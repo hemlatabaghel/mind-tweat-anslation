@@ -1,87 +1,113 @@
+"use client";
 import React from "react";
-import SectionLabel from "./SectionLabel";
 import Image from "next/image";
+import { Box, Typography, Button, Divider, IconButton } from "@mui/material";
+import SectionTitle from "./SectionLabel";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const cards = [
-    {
-      id: 1,
-      title: "Conquer The Trails: Finding The Perfect Men’s Hiking Footwear",
-      image: "/fashionStory/f1.png", // Place your image inside public/images/
-    },
-    {
-      id: 2,
-      title: "Conquer The Trails: Finding The Perfect Men’s Hiking Footwear",
-      subtitle: "Fashion Meets Vintage. Always in style.",
-      image: "/fashionStory/f2.png",
-    },
-    {
-      id: 3,
-      title: "Conquer The Trails: Finding The Perfect Men’s Hiking Footwear",
-      subtitle: "Fashion Meets Vintage. Always in style.",
-      image: "/fashionStory/f3.png",
-    },
-    {
-      id: 4,
-      title: "Conquer The Trails: Finding The Perfect Men’s Hiking Footwear",
-      image: "/fashionStory/f4.png",
-    },
-  ];
 const FashionStories = () => {
   return (
-    <div>
-      <section>
-        <SectionLabel title="Fasion Stories" />
+    <Box component="section" mt={8}>
+      <SectionTitle title="Fashion Stories" />
 
-        {[0, 1].map((index) => (
-          <div
-            key={index}
-            className={`flex flex-col md:flex-row items-center gap-10  mt-10 ml-30 mr-30 ${
-              index % 2 === 1 ? "md:flex-row-reverse" : ""
-            }`}
-          >
-            {/* Image and Arrows */}
-            <div className="relative w-[379px] min-w-[379px] h-[491px]">
-              <img
-                src={`/fashionStory/fashion${index + 1}.png`}
-                alt="Fashion Story"
-                className="w-full h-full object-cover rounded-xl"
-              />
+      {[0, 1].map((index) => (
+        <Box
+          key={index}
+          display="flex"
+          flexDirection={{ xs: "column", md: index % 2 === 1 ? "row-reverse" : "row" }}
+          alignItems="center"
+          gap={4}
+          mt={6}
+          mx={{ xs: 0, md: 4 }}
+        >
+          {/* Image with arrows */}
+          <Box position="relative" width={379} height={491} minWidth={379}>
+            <Image
+              src={`/fashionStory/fashion${index + 1}.png`}
+              alt="Fashion Story"
+              width={379}
+              height={491}
+              style={{ borderRadius: 12, objectFit: "cover" }}
+            />
 
-              {/* Left Arrow (always) */}
-              <button className="absolute top-1/2 -left-6 transform -translate-y-1/2 w-8 h-8 bg-[#EAEAEA] rounded-full flex items-center justify-center shadow">
-                ‹
-              </button>
+            {/* Left Arrow */}
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: -24,
+                transform: "translateY(-50%)",
+                backgroundColor: "#EAEAEA",
+                width: 32,
+                height: 32,
+                boxShadow: 1,
+              }}
+            >
+              <ArrowBackIosNewIcon fontSize="small" />
+            </IconButton>
 
-              {/* Right Arrow (always) */}
-              <button className="absolute top-1/2 -right-6 transform -translate-y-1/2 w-8 h-8 bg-[#EAEAEA] rounded-full flex items-center justify-center shadow">
-                ›
-              </button>
-            </div>
+            {/* Right Arrow */}
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "50%",
+                right: -24,
+                transform: "translateY(-50%)",
+                backgroundColor: "#EAEAEA",
+                width: 32,
+                height: 32,
+                boxShadow: 1,
+              }}
+            >
+              <ArrowForwardIosIcon fontSize="small" />
+            </IconButton>
+          </Box>
 
-            {/* Text Content */}
-            <div className="md:w-2/3 text-center md:text-left">
-              <h3 className="text-2xl font-bold mb-4 font-serif">
-                STYLE GUIDE AND HOW TO POST
-              </h3>
-              <p className="text-gray-700 text-base mb-4">
-                Get inspired with our styling tips and outfit ideas designed to
-                help you look and feel your best. From seasonal trends to
-                classic essentials, our guide helps you express your style with
-                confidence. Perfect for fashionistas who love to plan their
-                posts.
-              </p>
-              <div className="flex items-center gap-2 justify-center md:justify-start">
-                <button className="text-gray-500 font-bold text-lg font-serif">
-                  READ MORE
-                </button>
-                <div className="flex-1 h-px bg-orange-300 max-w-[160px]"></div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </section>
+          {/* Text Content */}
+          <Box flex={1} textAlign={{ xs: "center", md: "left" }}>
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              fontFamily="serif"
+              fontSize={32}
+              gutterBottom
+            >
+              STYLE GUIDE AND HOW TO POST
+            </Typography>
 
-    </div>
+            <Typography color="text.secondary" mb={2}>
+            Get inspired with our expert styling tips and outfit ideas designed to help you look and feel your best. Whether you're dressing for a special occasion, curating a capsule wardrobe, or learning how to mix textures and prints, our step-by-step guides make fashion easy and approachable.
+            </Typography>
+            <Typography color="text.secondary" mb={2}>
+            From layering essentials to seasonal must-haves, we break down the latest looks and show you how to make them your own — using pieces from our collection. Perfect for fashion newbies and style pros alike.
+            </Typography>
+
+            <Box
+              display="flex"
+              alignItems="center"
+              gap={2}
+              justifyContent={{ xs: "center", md: "flex-start" }}
+            >
+              <Button
+                sx={{
+                  color: "grey.700",
+                  fontWeight: "bold",
+                  fontSize: "1.125rem", // ~text-lg
+                  fontFamily: "serif",
+                  textTransform: "none",
+                  p: 0,
+                  minWidth: "auto",
+                }}
+              >
+                READ MORE
+              </Button>
+              <Divider sx={{ flex: 1, maxWidth: 160, bgcolor: "#FDBA74" }} />
+            </Box>
+          </Box>
+        </Box>
+      ))}
+    </Box>
   );
 };
 
